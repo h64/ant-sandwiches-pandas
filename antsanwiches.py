@@ -30,7 +30,7 @@ rows, cols = dataset.shape # df.shape
 # print(f'In the dataset there are {rows} rows and {cols} columns')
 # print(dataset.info()) # Show Datatypes
 # print(dataset.describe()) # Show All Stats (count, mean, std, mean, max)
-print(dataset) # Show whole dataset
+# print(dataset) # Show whole dataset
 
 avg_ants = dataset['Ants'].mean()
 print(f"On average, there are {avg_ants} ants on any given sandwich")
@@ -65,14 +65,12 @@ print(f'Above avg: {above_avg}')
 # Export dataframe to file
 # results.to_filetype('results.csv')
 
-# corr = dataset['Filling'].corr(dataset['Ants'])
 bread_correlations = {
     'White': sandwich_data['White'].corr(dataset['Ants']),
     'WholeWheat': sandwich_data['WholeWheat'].corr(dataset['Ants']),
     'MultiGrain': sandwich_data['MultiGrain'].corr(dataset['Ants']),
     'Rye': sandwich_data['Rye'].corr(dataset['Ants'])
 }
-
 print(bread_correlations)
 
 filling_correlations = {
@@ -80,5 +78,9 @@ filling_correlations = {
     'PeanutButter': filling_data['PeanutButter'].corr(dataset['Ants']),
     'HamPickles': filling_data['HamPickles'].corr(dataset['Ants']),
 }
-
 print(filling_correlations)
+
+# print(dataset[dataset.columns[2:]])
+# print(pd.concat([sandwich_data, filling_data], axis=1, keys=["sandwich_data", "filling_data"]).corr())
+print(pd.concat([sandwich_data, filling_data], axis=1, keys=["sandwich_data", "filling_data"]).corr().loc['sandwich_data', 'filling_data'])
+# print(dataset)
