@@ -9,21 +9,21 @@ dataset = pd.read_csv('https://vincentarelbundock.github.io/Rdatasets/csv/Stat2D
 
 bread_set = set()
 filling_set = set()
-sandwich_dict = {}
-filling_dict = {}
+breads = {}
+fillings = {}
 
 for row in dataset.values:
     if row[2] not in bread_set:
         bread_set.add(row[2])
-        sandwich_dict[row[2]] = [row[5]]
+        breads[row[2]] = [row[5]]
     else:
-        sandwich_dict[row[2]].append(row[5])
+        breads[row[2]].append(row[5])
 
     if row[3] not in filling_set:
         filling_set.add(row[3])
-        filling_dict[row[3]] = [row[5]]
+        fillings[row[3]] = [row[5]]
     else:
-        filling_dict[row[3]].append(row[5])
+        fillings[row[3]].append(row[5])
 
 ### First glance @ the dataset ###
 rows, cols = dataset.shape # df.shape
@@ -36,8 +36,8 @@ rows, cols = dataset.shape # df.shape
 avg_ants = dataset['Ants'].mean()
 print(f"On average, there are {avg_ants} ants on any given sandwich")
 
-bread_data = pd.DataFrame(sandwich_dict) # Convert dictionary to DataFrame
-filling_data = pd.DataFrame(filling_dict)
+bread_data = pd.DataFrame(breads) # Convert dictionary to DataFrame
+filling_data = pd.DataFrame(fillings)
 # print(bread_set)
 # print(filling_set)
 # print(bread_data)
